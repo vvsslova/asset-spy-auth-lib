@@ -28,14 +28,13 @@ public class JwtService {
         return extractAllClaims(token).get("role", String.class);
     }
 
-    public boolean isTokenValid(String token) {
+    public void validateTokenOrThrow(String token) {
         try {
             Jwts
                     .parser()
                     .verifyWith(getKey())
                     .build()
                     .parseSignedClaims(token);
-            return true;
         } catch (ExpiredJwtException e) {
             throw new JwtValidationException("Expired JWT token", e);
         } catch (MalformedJwtException e) {
