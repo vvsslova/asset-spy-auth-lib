@@ -1,7 +1,7 @@
 package asset.spy.auth.lib.filter;
 
+import asset.spy.auth.lib.exception.JwtValidationException;
 import asset.spy.auth.lib.service.JwtService;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,7 +58,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
                     filterChain.doFilter(request, response);
                 }
-            } catch (JwtException e) {
+            } catch (JwtValidationException e) {
                 resolver.resolveException(request, response, null, e);
             }
         } else {
