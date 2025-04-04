@@ -19,20 +19,20 @@ public class LibraryExceptionHandler {
     private ResponseEntity<ErrorResponseDto> handleException(JwtValidationException e) {
         ErrorResponseDto response = new ErrorResponseDto(e.getMessage());
         log.error("Jwt validation exception: {}", e.getMessage(), e);
-        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<ErrorResponseDto>(response, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     private ResponseEntity<ErrorResponseDto> handleException(AccessDeniedException e) {
         ErrorResponseDto response = new ErrorResponseDto("Access denied");
         log.error("Access denied", e);
-        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+        return new ResponseEntity<ErrorResponseDto>(response, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(AuthenticationException.class)
     private ResponseEntity<ErrorResponseDto> handleException(AuthenticationException e) {
         ErrorResponseDto response = new ErrorResponseDto(e.getMessage());
         log.error("Authentication exception", e);
-        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<ErrorResponseDto>(response, HttpStatus.UNAUTHORIZED);
     }
 }
